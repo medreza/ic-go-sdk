@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/Accelbyte/ic-go-sdk"
+	"github.com/AccelByte/ic-go-sdk"
 	"github.com/sirupsen/logrus"
 )
 

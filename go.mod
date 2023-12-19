@@ -1,4 +1,4 @@
-module github.com/Accelbyte/ic-go-sdk
+module github.com/AccelByte/ic-go-sdk
 
 go 1.18
 
