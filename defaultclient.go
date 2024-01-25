@@ -130,7 +130,6 @@ func (client *DefaultClient) ValidatePermission(claims *JWTClaims, requiredPermi
 	}
 
 	if client.permissionAllowed(claims.Permissions, requiredPermission) {
-		log("ValidatePermission: permission allowed to access resource")
 		return true, nil
 	}
 
