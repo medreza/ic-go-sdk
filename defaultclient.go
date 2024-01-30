@@ -17,13 +17,14 @@ package ic
 import (
 	"context"
 	"crypto/rsa"
+	"net/http"
+	"strings"
+	"time"
+
 	"github.com/AccelByte/go-restful-plugins/v3/pkg/jaeger"
 	"github.com/bluele/gcache"
 	"github.com/pkg/errors"
 	"go.uber.org/atomic"
-	"net/http"
-	"strings"
-	"time"
 )
 
 const (
@@ -127,6 +128,11 @@ func (client *DefaultClient) ValidatePermission(claims *JWTClaims, requiredPermi
 	for placeholder, value := range permissionResources {
 		requiredPermission.Resource = strings.Replace(requiredPermission.Resource, placeholder, value, 1)
 	}
+
+	if client.permissionAllowed(claims.Permissions, requiredPermission) {
+		return true, nil
+	}
+
 	for _, role := range claims.Roles {
 		rolePermission, err := client.GetRolePermissions(role.RoleID)
 		if err != nil {
